@@ -1,18 +1,15 @@
-from selenium import webdriver
 import os
 
-##This program is meant to to complement youtube-dl, populating a text file with series episode links
-##Made for use with crunchyroll and developed because using series main pages leads to near 100%,
-##errors when trying to download. Using episode links sidesteps this problem and never (for me anyways)
-##leads to errors.
+from selenium import webdriver
 
-##enables headless
+## This program is meant to to complement youtube-dl, populating a text file with series episode links. It is also specifically for use with Crunchyroll and because using series links leads to near 100% errors when trying to download. Using episode links sidesteps this problem and never (for me anyways) led to errors.
+
+## Enables headless operation
 fireFoxOptions = webdriver.FirefoxOptions()
 fireFoxOptions.set_headless()
 
 ##list of all series main pages to scrape episode links from
-##I'm going to get rid of this in future updates relying strictly,
-##on a text file for this to work
+## Note: I'm going to get rid of this in future updates relying strictly on a text file for this to work
 cvl = [
     'https://www.crunchyroll.com/a-bridge-to-the-starry-skies-hoshizora-e-kakaru-hashi',
     'https://www.crunchyroll.com/a-certain-magical-index',
@@ -47,6 +44,7 @@ cvl = [
     'https://www.crunchyroll.com/bakemonogatari',
     'https://www.crunchyroll.com/bananya',
     'https://www.crunchyroll.com/bang-dream',
+    'https://www.crunchyroll.com/battle-game-in-5-seconds',
     'https://www.crunchyroll.com/beyond-the-boundary',
     'https://www.crunchyroll.com/berserk',
     'https://www.crunchyroll.com/black-bullet',
@@ -115,8 +113,10 @@ cvl = [
     'https://www.crunchyroll.com/dragon-crisis',
     'https://www.crunchyroll.com/dragon-quest-the-adventure-of-dai',
     'https://www.crunchyroll.com/dropkick-on-my-devil-dash',
+    'https://www.crunchyroll.com/drug-store-in-another-world-the-slow-life-of-a-cheat-pharmacist',
     'https://www.crunchyroll.com/elegant-yokai-apartment-life',
     'https://www.crunchyroll.com/elemental-gelade',
+    'https://www.crunchyroll.com/erased',
     'https://www.crunchyroll.com/eromanga-sensei',
     'https://www.crunchyroll.com/ex-arm',
     'https://www.crunchyroll.com/fairy-tail',
@@ -205,6 +205,7 @@ cvl = [
     'https://www.crunchyroll.com/isekai-izakaya-japanese-food-from-another-world',
     'https://www.crunchyroll.com/isekai-cheat-magician',
     'https://www.crunchyroll.com/isekai-quartet',
+    'https://www.crunchyroll.com/island',
     'https://www.crunchyroll.com/is-it-wrong-to-try-to-pick-up-girls-in-a-dungeon',
     'https://www.crunchyroll.com/is-the-order-a-rabbit',
     'https://www.crunchyroll.com/ive-always-liked-you',
@@ -222,6 +223,7 @@ cvl = [
     'https://www.crunchyroll.com/kamigami-no-asobi',
     'https://www.crunchyroll.com/kamisama-dolls',
     'https://www.crunchyroll.com/kamisama-hajimemashita',
+    'https://www.crunchyroll.com/kanojo-ga-flag-wo-oraretara-if-her-flag-breaks',
     'https://www.crunchyroll.com/karakai-jozu-no-takagi-san',
     'https://www.crunchyroll.com/katana-maidens-mini-toji',
     'https://www.crunchyroll.com/katana-maidens-toji-no-miko',
@@ -278,6 +280,7 @@ cvl = [
     'https://www.crunchyroll.com/moritasan-wa-mukuchi',
     'https://www.crunchyroll.com/motto-to-love-ru',
     'https://www.crunchyroll.com/mr-love-queens-choice',
+    'https://www.crunchyroll.com/muhyo-rojis-bureau-of-supernatural-investigation',
     'https://www.crunchyroll.com/music-girls',
     'https://www.crunchyroll.com/my-first-girlfriend-is-a-gal',
     'https://www.crunchyroll.com/my-hero-academia',
@@ -305,6 +308,7 @@ cvl = [
     'https://www.crunchyroll.com/natsume-yujin-cho-6',
     'https://www.crunchyroll.com/nekomonogatari-black',
     'https://www.crunchyroll.com/netsuzou-trap-ntr-',
+    'https://www.crunchyroll.com/night-head-2041',
     'https://www.crunchyroll.com/nisekoi',
     'https://www.crunchyroll.com/nisemonogatari',
     'https://www.crunchyroll.com/ninja-collection',
@@ -421,10 +425,12 @@ cvl = [
     'https://www.crunchyroll.com/the-ambition-of-oda-nobuna',
     'https://www.crunchyroll.com/the-ancient-magus-bride',
     'https://www.crunchyroll.com/the-asterisk-war',
+    'https://www.crunchyroll.com/the-aquatope-on-white-sand',
     'https://www.crunchyroll.com/the-eccentric-family',
     'https://www.crunchyroll.com/the-eccentric-family-2',
     'https://www.crunchyroll.com/the-garden-of-sinners',
     'https://www.crunchyroll.com/the-god-of-high-school',
+    'https://www.crunchyroll.com/the-great-jahy-will-not-be-defeated',
     'https://www.crunchyroll.com/the-hidden-dungeon-only-i-can-enter',
     'https://www.crunchyroll.com/the-idolmster-cinderella-girls',
     'https://www.crunchyroll.com/the-idolmster-cinderella-girls-theater',
@@ -448,6 +454,7 @@ cvl = [
     'https://www.crunchyroll.com/todays-menu-for-the-emiya-family',
     'https://www.crunchyroll.com/to-love-ru',
     'https://www.crunchyroll.com/to-love-ru-darkness',
+    'https://www.crunchyroll.com/tokyo-revengers',
     'https://www.crunchyroll.com/tonikawa-over-the-moon-for-you',
     'https://www.crunchyroll.com/toradora',
     'https://www.crunchyroll.com/tower-of-god',
@@ -508,42 +515,52 @@ cvl = [
     'https://www.crunchyroll.com/yuuna-and-the-haunted-hot-springs',
     'https://www.crunchyroll.com/zombie-land-saga'
 ]
+current_episode = []
+crunchyroll_series = 'crunchyroll_series_list.txt'
 crel = 'cr_episode_list.txt'
 
 if not crel in os.listdir():
     open(crel, 'w')
 episode_list = open(crel, 'r')
-current_episode_list = episode_list.readlines()
+for s in episode_list.readlines():
+    current_episode.append(s)
+
+## Use this section of code to make sure that your file is read and appended to current_episode before you run the code to prevent duplicate entries.
+# current_episode = 
+# for e in current_episode:
+#     print(e)
+# quit()
 
 with webdriver.Firefox(options=fireFoxOptions) as driver:
     count = 0
     for series in cvl:
         driver.get(cvl[count])
 
-        ## gets all links inside .episode which are the episode links including all dubbed versions
+        ## Gets all links inside .episode which are the episode links including all dubbed versions
         starts = driver.find_elements_by_class_name('episode')        
         for start in starts:
 
-            ##looks in each a tag for href attribute
+            ## looks in each a tag for href attribute
             end = start.get_attribute('href')
             
-            ##suppose to look in your crel file to make sure it doesn't write duplicate links,
-            ##unfortunately this is something I'm having trouble getting to work
-            if end in current_episode_list:
+            ## Prevents writing duplicate links by checking current_episode list for it
+            if end + '\n' in current_episode:
                 print('[archived]', end)
                 continue
 
-            ##if attribute is none then navigate to next series
+            ## If attribute = none then navigate to next series
             elif start.get_attribute('href') == None:
+                print('2[NONE]', end)
                 break
 
-            ##if attribute is an episode link then print and write to cvel
+            ## Note: entries will not appear in archive until program is complete
+            ## If attribute is an episode link then print and write to cvel
             elif end.startswith(cvl[count] + '/episode'):
                 episode_list = open(crel, 'a')
                 episode_list.write(end + '\n')
-                print(end)
+                print('5', end)
                 
-        ##incrementing begins next series to load
+        ## Incrementing begins next series to load
         count+=1
     driver.quit
     quit()
