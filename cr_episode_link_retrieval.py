@@ -8,12 +8,33 @@ from colored import stylize
 from tkinter import *
 from selenium import webdriver
 
-
 # This program is meant to to complement youtube-dl, populating a text file with series episode links. It is also specifically for use with Crunchyroll and because using series links leads to near 100% errors when trying to download. Using episode links sidesteps this problem and never (for me anyways) led to errors.
 
 # Enables headless operation
 fireFoxOptions = webdriver.FirefoxOptions()
 fireFoxOptions.headless = True
+
+
+def link_format(link):
+    # Below: Formatting for new episodes displayed using tkinter for aesthetic purpose only, you can safely comment this out.
+    # Removes the episode ID.
+    link = link[:-7]
+    
+    # Splits series title from episode.
+    link = link.split('/')
+
+    series_title = link[0].replace('-', ' ').title()
+
+    # Replace the hyphen after episode number with a semi-colon.
+    episode_title = link[1].replace('-', ': ', 2).replace('-', ' ').title()
+
+    # Finalizes the formatting for display in list_entry.
+    link = series_title + ' - ' + episode_title
+
+    #Returns the formatted string to be inserted into GUI.
+    return link
+    # Above: Formatting for new episodes displayed using tkinter for aesthetic purpose only, you can safely comment this out.
+
 
 # current_series = [] # Not to be used until replacement for cvl is ready
 current_episode = [] # Will contain episodes from your archive file
@@ -81,6 +102,7 @@ with webdriver.Firefox(options=fireFoxOptions) as driver:
 
             # Note: entries will not appear in archive until the entire specified series has been written
             else:
+
                 # Appends episode link to the cr_episode_list.txt.
                 episode_list = open(crunchyroll_episodes, 'a')
                 episode_list.write(episode_link + '\n') 
@@ -88,24 +110,9 @@ with webdriver.Firefox(options=fireFoxOptions) as driver:
                 # Used only for showing whats been written, you won't need it on
                 print(stylize('[WRITING] ' + episode_link, colored.fg(112)))
 
-                # Below: Formatting for new episodes displayed using tkinter for aesthetic purpose only, you can safely comment this out.
-                # Removes the episode ID.
-                episode_link = episode_link[:-7]
-                
-                 # Splits series title from episode.
-                episode_link = episode_link.split('/')
-
-                series_title = episode_link[0].replace('-', ' ').title()
-
-                # Replace the hyphen after episode number with a semi-colon
-                episode_title = episode_link[1].replace('-', ': ', 2).replace('-', ' ').title()
-
-                #Finalizes the formatting for display in list_entry
-                episode_link = series_title + ' - ' + episode_title
-                # Above: Formatting for new episodes displayed using tkinter for aesthetic purpose only, you can safely comment this out.
-
-                #Inserts episode link into listbox and is displayed once the program has finished going through the entirety of cvl
-                listbox.insert(list_entry, episode_link)                
+                # Inserts episode link into listbox and is displayed once the program has finished going through the entirety of cvl. 
+                # Optional: Also sends episode_link to link_format for formatting to display on tkinter. If you don't care about formatting then get rid of the function but keep episode_link in place.
+                listbox.insert(list_entry, link_format(episode_link))                
                 
         # Incrementing begins next series to load
         list_entry += 1
