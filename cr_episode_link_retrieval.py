@@ -1,8 +1,8 @@
 import os
-import time
 
 import colored
 import tkinter
+import pyautogui
 
 from colored import stylize
 from tkinter import *
@@ -57,6 +57,8 @@ sb.pack(side=RIGHT, fill=Y)
 listbox.configure(yscrollcommand=sb.set)
 sb.config(command=listbox.yview)
 
+pyautogui.alert('Please be patient as the program writes the episode links. If you have a lot of series for it to look through then it could take awhile.\n\nFor example, I tested it with 500 series and it took ~15 minutes to complete. One of which was One Piece.', 'NOTICE FOR USER')
+
 with webdriver.Firefox(options=fireFoxOptions) as driver:
     list_entry = 0
     for titles in cvl.readlines():
@@ -78,18 +80,15 @@ with webdriver.Firefox(options=fireFoxOptions) as driver:
                 continue
 
             # Note: entries will not appear in archive until the entire specified series has been written
-            # If attribute is an episode link then print and write to cvel.
-            elif parse_episode_link.startswith(titles + '/episode'):
-
+            else:
                 # Appends episode link to the cr_episode_list.txt.
                 episode_list = open(crunchyroll_episodes, 'a')
                 episode_list.write(episode_link + '\n') 
                 
                 # Used only for showing whats been written, you won't need it on
-                # print(stylize('[WRITING] ' + episode_link, colored.fg(112)))
+                print(stylize('[WRITING] ' + episode_link, colored.fg(112)))
 
                 # Below: Formatting for new episodes displayed using tkinter for aesthetic purpose only, you can safely comment this out.
-
                 # Removes the episode ID.
                 episode_link = episode_link[:-7]
                 
@@ -103,7 +102,6 @@ with webdriver.Firefox(options=fireFoxOptions) as driver:
 
                 #Finalizes the formatting for display in list_entry
                 episode_link = series_title + ' - ' + episode_title
-
                 # Above: Formatting for new episodes displayed using tkinter for aesthetic purpose only, you can safely comment this out.
 
                 #Inserts episode link into listbox and is displayed once the program has finished going through the entirety of cvl
